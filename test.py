@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
+# python test.py -i ../apertura -o test.json -q -e dist -c \\n \\r \\# \\t
 
 # @module
 # ┝ title:{{}}
+# ┝ type:{{}}
 # ┝ caption:{{}}
 # ┝ @property
 # ╎ ┝ name:{{}}
@@ -63,8 +65,9 @@ total_modules = 0
 # module parsing
 def get_module(inp):
 	title 	= re.findall(r'@module.*?title:(.*?)\*n', inp, re.MULTILINE|re.DOTALL)
+	typ 	= re.findall(r'@module.*?type:(.*?)\*n', inp, re.MULTILINE|re.DOTALL)
 	caption = re.findall(r'@module.*?caption:(.*?)\*n', inp, re.MULTILINE|re.DOTALL)
-	return [title,caption]
+	return [title,caption,typ]
 
 # properties parsing
 def get_module_properties(inp):
@@ -133,7 +136,7 @@ def parse_keys(_file, _output, _status, _quiet, _file_name, _path):
 		module_plugins 		= get_module_plugins(input_)
 
 		# module
-		module_names = ['title','caption']
+		module_names = ['title','caption','type']
 		i = 0
 		for g in module:
 			_output.write("\t\t\""+module_names[i]+"\": \""+g[0]+"\",\n\r")
