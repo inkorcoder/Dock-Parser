@@ -1,13 +1,57 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
-# python test.py -i ../apertura -o test.json -q -e dist -c \\n \\r \\# \\t
 
+################################################################
+#                    JSON PARSER
+#
+# --------------------------------------------------------------
+# 				author: 	Inkor
+# 				year: 		2015
+# --------------------------------------------------------------
+#
+# This script can generate documentation from your project.
+# There are all directives, wich this script can parse:
+# 	-i, --input_folder - [relative path to folder] Input
+# 	-o, --output_file  - [ralative path to file] Output
+# 	-e, --exeptions    - [string] Exeptions
+# 	-q, --quiet_mode   - [flag] Quiet mode
+# 	-c, --cut_symbols  - [string] Cute symbols
+#
+# And here it is a better information:
+# --------------------------------------------------------------
+# NAME         | CAPTION                                       |
+# --------------------------------------------------------------
+# Input folder | Your project folder. All files in this folder |
+#              | will be scaned. Path to this folder must be   |
+#              | relative, for eample: [../back_to/this_foldr] |
+# --------------------------------------------------------------
+# Output file  | Relative path, where you need to creeate your |
+#              | output file, for eample: [../up/myfile.json]  |
+# --------------------------------------------------------------
+# Exeptions    | This folders will be ignored. Just words      |
+#              | with spaces, for example: [dist img myfoldr2] |
+# --------------------------------------------------------------
+# Quiet mode   | If enabled, results will not be written in    |
+#              | console.                                      |
+# --------------------------------------------------------------
+# Cut symbols  | Symbols will be ignored. Each symbol must be  |
+#              | escaped with '\' [\\n \\t \\r \#], NOT [\n \t]|
+# --------------------------------------------------------------
+#
+# And here is an example:
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# python test.py -i ../apertura -o list.json -e dist .git -q -c \\n \\t \\r \#
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# [input] 				-i ../apertura
+# [output] 				-o list.json
+# [exeptions] 		-e dist .git
+# [quiet mode]		-q
+# [cuted symbols] -c \\n \\t \\r \#
+#
+################################################################
 
-
-###############################################################
 # Modules import
-###############################################################
-
 import sys, argparse, os, time, re
 
 
@@ -43,25 +87,6 @@ class color:
 parser = argparse.ArgumentParser(add_help=True)
 
 # This arguments will be used
-# ---------------------------------------------------------------
-# NAME          | CAPTION                                       |
-# ---------------------------------------------------------------
-# Input folder  | Your project folder. All files in this folder |
-#               | will be scaned. Path to this folder must be   |
-#               | relative, for eample: [../back_to/this_foldr] |
-# ---------------------------------------------------------------
-# Output file   | Relative path, where you need to creeate your |
-#               | output file, for eample: [../up/myfile.json]  |
-# ---------------------------------------------------------------
-# Exeptions     | This folders will be ignored. Just words      |
-#               | with spaces, for example: [dist img myfoldr2] |
-# ---------------------------------------------------------------
-# Quiet mode    | If enabled, results will not be written in    |
-#               | console.                                      |
-# ---------------------------------------------------------------
-# Cut symbols   | Symbols will be ignored. Each symbol must be  |
-#               | escaped with '\' [\\n \\t \\r \#], NOT [\n \t]|
-# ---------------------------------------------------------------
 # [INPUT]
 parser.add_argument(
 	"-i", "--input_folder",
@@ -166,7 +191,7 @@ def parse_keys(_file, _output, _status, _quiet, _file_name, _path):
 		global total_modules
 		total_modules += 1
 
-		print(color.OKBLUE+"-> "+_file+color.ENDC+" "+color.GREY+"("+str(len(input_file))+")"+color.ENDC)
+		print("> "+color.OKBLUE+_file+color.ENDC+" : "+color.GREY+str(len(input_file))+color.ENDC)
 		time.sleep(0.3)
 
 		# Head of the module, we are getting it from file info
@@ -375,13 +400,13 @@ def create_output(inp, outp, quiet):
 if args.input_folder:
 
 	# Print input folder
-	print(color.HEADER+"\n\r <-- "+color.ENDC+args.input_folder)
+	print("\n\r <-- "+color.HEADER+args.input_folder+color.ENDC)
 
 	# If we have output file path
 	if args.output_file:
 
 		# Print output file path
-		print(color.OKGREEN+" --> "+color.ENDC+args.output_file+"\n\r")
+		print(" --> "+color.OKGREEN+args.output_file+color.ENDC+"\n\r")
 		# And start parsing
 		create_output(args.input_folder, args.output_file, args.quiet_mode)
 

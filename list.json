@@ -1,0 +1,940 @@
+[
+
+	{
+		"filename": "gulpfile.coffee",
+		"path":     "../apertura",
+		"file":     "../apertura/gulpfile.coffee",
+		"size":     "25316",
+		"length":   "25316",
+		"title":     " Gulpfile ",
+		"caption":     "p{ Gulp.js является главным связующим элементом системы.Это сборщик, который позволяет ускорить и автоматизироватьработу при разработке проекта. Он распологает огромнымколичеством модулей под любые нужды и случаи. }pp{ Для его корректной работы с этой системой нужнаплатформа Node.js, а так же список необходимых модулейдля компиляции, минификации и интеграции системы с Вашейоперационной системой. }ph3{ СТРУКТУРА }h3",
+		"type":     " coffeescript ",
+
+		"properties": [
+
+			{"name": " PATH ", "caption": "p{ Переменная PAHT содержит относительный путь к корневойпапке. Корень проектка - папка с bd{ gulpfile.coffee} }pp{ По умолчанию текущая папка, - bd{ '' }Это может быть bd{ '../../' } или bd{ 'myfolder/' } }p"},
+			{"name": " OPTIONS ", "caption": "p{ Объект, содержит в себе настройки для этого файла. При запуске, bd{Gulp.js} 'поднимает' локальный сервер,настройки которого Вы так же можете изменить.}pul{li{ bd{serverHost} - имя локального сервера}lili{ bd{serverPort} - порт}lili{ bd{serverLivereload} - Livereload, автоматическоеобновление страницы при изменении редактируемых файлов.Вам не нужны дополнительные плагины или примочки дляВашей IDE}lili{ bd{coffeeWraping} - Включает или выключает оборачивание javascript-модулей(файлов) в анонимные самовызывающиеся функции при копиляции из bd{coffeescript}-исходников}lili{ bd{notices} - Включает или выключает оповещенияоб ошибках или информации для отладки в Вашей ОС. }li}ul"}
+		],
+
+		"methods": [
+
+			{
+				"name":      " consol() ",
+				"caption":   " p{ Метод для выводв в консоль сообщения. }p ",
+				"arguments": " str, str2, str3 ",
+				"returns":   " nothing "
+			},
+			{
+				"name":      " execute() ",
+				"caption":   " p{ Метод для выполнения команд ОС внутри модуля. Этот метод выполняет команду, которую принимает на входе }pp{ arg{ command } - команда, которая должна быть выполнена }pp{ arg{ callback } - функция, которая будет выполнена после выполнения команды bd{ command } }p",
+				"arguments": " command, callback ",
+				"returns":   " nothing "
+			},
+			{
+				"name":      " _CoffeeConsole() ",
+				"caption":   " p{ Приватный метод, обрабатывающий ошибки при компиляции Coffeescript. Если включен параметр bd{ OPTIONS.notices },сообщение для отладки выводится не только в терминал, но и показывается в виде оповещения операционной системы }pp{ bd{ err } - объект, содержащий подробности об ошибке }p",
+				"arguments": " err ",
+				"returns":   " nothing "
+			},
+			{
+				"name":      " _SASSConsole() ",
+				"caption":   " p{ Приватный метод, обрабатывающий ошибки при компиляции SASS. Если включен параметр bd{ OPTIONS.notices },сообщение для отладки выводится не только в терминал, но и показывается в виде оповещения операционной системы }pp{ bd{ err } - объект, содержащий подробности об ошибке }p",
+				"arguments": " err ",
+				"returns":   " nothing "
+			},
+			{
+				"name":      " _writeLog() ",
+				"caption":   " p{ Приватный метод, для вывода информации в терминал. }pp{ bd{ element } - объект, содержащий подробности об ошибке }p",
+				"arguments": " element, type, str ",
+				"returns":   " nothing "
+			},
+			{
+				"name":      " gulp.task()::connect ",
+				"caption":   "p{ 'Подъем' локального сервера. Настройки сервера указываются в объекте bd{ OPTIONS }}p",
+				"arguments": " none ",
+				"returns":   " server "
+			},
+			{
+				"name":      " gulp.task()::coffee ",
+				"caption":   "p{ Компиляция CoffeeScript. Таск выбирет все файлы по маске bd{ 'coffee/*coffee' }, вставляет содержимое других фалов (функции bd{ =include '../file.coffee'}, если они присутствуют), компилирует код, складывает в папку bd{ 'dist/js' } и обновляет страницу в браузере (если эта включена в объекте bd{ OPTIONS }). При этом Вы можете отключать оборачивание модулей в самовызывающиеся функции (см. объект bd{ OPTIONS }).}pp{ Так же, таск не прерывает работу сборщика в случае возникновения ошибки. Сообщение об ошибке и отладочная информация пишется в консоль и выводится в виде нотификации (оповещения) вашей системы.}pp{ Оповещения работают только под линук-дистрибутивами.Для этого убедитесь, что пакет bd{ libnotify-bin } установлен. }p",
+				"arguments": " none ",
+				"returns":   " dest "
+			},
+			{
+				"name":      " gulp.task()::sass ",
+				"caption":   "p{ Компиляция SASS. Таск выбирет все файлы по маске bd{ 'scss/-/*scss' }, вставляет содержимое, компилирует код, складывает в папку bd{ 'dist/css' } и обновляет страницу в браузере (если эта включена в объекте bd{ OPTIONS }) }pp{ Так же, таск не прерывает работу сборщика в случае возникновения ошибки. Сообщение об ошибке и отладочная информация пишется в консоль и выводится в виде нотификации (оповещения) вашей системы.}pp{ Оповещения работают только под линук-дистрибутивами.Для этого убедитесь, что пакет bd{ libnotify-bin } установлен. }p",
+				"arguments": " none ",
+				"returns":   " dest "
+			},
+			{
+				"name":      " gulp.task()::IncHTML ",
+				"caption":   "p{ Таск выбирет все файлы по маске bd{ 'html/-/*html' }, вставляет содержимое (функции bd{ =include '../file.coffee'}, если они присутствуют) и складывает в папку bd{ 'dist' } и обновляет страницу в браузере (если эта включена в объекте bd{ OPTIONS }).p{ Так же, таск не прерывает работу сборщика в случае возникновения ошибки. Сообщение об ошибке и отладочная информация пишется в консоль}pp{ imp{ ВАЖНО. При запуске сборщика, если папка bd{ html } не была удалена, html-файлы в папке bd{ dist } будут перезаписаны содержимым результата обработки папки bd{ html } }impЧтобы избежать потери данных не редактируйте файлы в bd{ dist },делайте это в папке bd{ html } }p",
+				"arguments": " none ",
+				"returns":   " dest "
+			},
+			{
+				"name":      " gulp.task()::css ",
+				"caption":   "p{ Таск следит за изменениями в файлах по маске bd{ 'dist/css/*css' } и при изменении файлов обновляет страницу в браузере (если эта включена в объекте bd{ OPTIONS }).}p",
+				"arguments": " none ",
+				"returns":   " dest "
+			},
+			{
+				"name":      " gulp.task()::HTML ",
+				"caption":   "p{ Таск следит за изменениями в файлах по маске bd{ 'dist/*html' } и при изменении файлов обновляет страницу в браузере (если эта включена в объекте bd{ OPTIONS }).}p",
+				"arguments": " none ",
+				"returns":   " dest "
+			},
+			{
+				"name":      " gulp.task()::Js ",
+				"caption":   "p{ Таск следит за изменениями в файлах по маске bd{ 'dist/js/*js' } и при изменении файлов обновляет страницу в браузере (если эта включена в объекте bd{ OPTIONS }).}pp{ imp{ ВАЖНО. При запуске сборщика, если папка bd{ coffee } не была удалена, html-файлы в папке bd{ dist/js } будут перезаписаны содержимым результата обработки папки bd{ coffee } }impЧтобы избежать потери данных не редактируйте файлы в bd{ dist/js },делайте это в папке bd{ coffee } }p",
+				"arguments": " none ",
+				"returns":   " dest "
+			},
+			{
+				"name":      " gulp.task()::list ",
+				"caption":   "p{ Таск следит за изменениями в структуре файлов системыи формирует JSON для обработки в ADK.}p",
+				"arguments": " none ",
+				"returns":   " dest "
+			},
+			{
+				"name":      " gulp.task()::watch ",
+				"caption":   "p{ Таск связывает файлы в папках с их обработчиками. Задача этого таска - отслеживание ищменений в указаных директориях. И выполнять действия, которые указаны в случае изменения файла. }p",
+				"arguments": " none ",
+				"returns":   " dest "
+			},
+			{
+				"name":      " gulp.task()::default ",
+				"caption":   "p{ Главный таск-конструктор, который описывает всенужные таски для работы.}p",
+				"arguments": " none ",
+				"returns":   " dest "
+			}
+		],
+
+		"plugins": [
+
+			{"name": " fs ", "caption": "p{ Манипуляции с файловой системой. Чтение, запись, созданиесписка файлов в bd{ list.json } (./dev-tools/list.json) }pa{ https://nodejs.org/api/fs.html }"},
+			{"name": " gulp ", "caption": "p{ Сборщик проектов, основа для остальных модулей, нужныхдля автоматизации, компиляции и минификации файлов проекта}pa{ https://github.com/gulpjs/gulp }"},
+			{"name": " gulp-connect ", "caption": "p{ Модуль серверной части. Его настройки содержит в себеbd{ OPTIONS } }pa{ https://www.npmjs.com/package/gulp-connect }"},
+			{"name": " gulp-connect ", "caption": "p{ Компилятор Coffeescript. Настройку оборачивания для негосодержит в себе bd{ OPTIONS } }pp{ Компилятор выбирает все файлы в папке bd{ coffee },компилирует их и помещает *js-файлы в папку bd{ dist/js }с таким же названием, которое имеет исходный файл. }pp{ Если вы не знаете что такое Coffeescript, Вы можете править *js-файлы. При этом папку bd{ coffee } нужно удалить,иначе при запуске bd{ gulp } исходники в этой папке скомпилируются и перезапишут *js-файлы. Будьте осторожны. }pa{ https://www.npmjs.com/package/gulp-coffee }"},
+			{"name": " gulp-clean ", "caption": "p{ Очистка временных файлов после компиляции}pa{ https://www.npmjs.com/package/gulp-clean }"},
+			{"name": " gulp-sass ", "caption": "p{ Компиляция SASS-исходников в *css-файлы }pp{ Компилятор выбирает все файлы в папке bd{ scss },компилирует их и помещает *css-файлы в папку bd{ dist/css }с таким же названием, которое имеет исходный файл. }pp{ Если вы не знаете что такое Coffeescript, Вы можете править *css-файлы. При этом папку bd{ scss } нужно удалить,иначе при запуске bd{ gulp } исходники в этой папке скомпилируются и перезапишут *css-файлы. Будьте осторожны. }pa{ https://www.npmjs.com/package/gulp-sass }"},
+			{"name": " colors ", "caption": "p{ Модуль цветов. Это вспомогающий модуль, который 'разукрашивает' команды консоли в разные цвета }pa{ https://github.com/marak/colors.js/ }"},
+			{"name": " gulp-include ", "caption": "p{ Модуль вставки файлов друг в друга. Этот модуль позволяетвставлять содержимое нужного файла в определенное место, используя специальные конструкции - bd{ //=include 'myfile.txt' } }pp{ Полную информацию об используемых конструкциях можно найти на странице плагина. }pa{ https://www.npmjs.com/package/gulp-include }"},
+			{"name": " gulp-cssmin ", "caption": "p{ Модуль минифицирует *css-файлы. Минифицированные файлынаходятся по пути bd{ dist/css }. В то время, как не минифицированные - bd{ dist/css/full } }pa{ https://www.npmjs.com/package/gulp-cssmin }"},
+			{"name": " gulp-rename ", "caption": "p{ Вспомогающий модуль, для переименования файлов после компиляции. }pa{ https://www.npmjs.com/package/gulp-rename }"},
+			{"name": " gulp-filelist ", "caption": "p{ Вспомогающий модуль для ADK. Формирует JSON-файл, содержащий список файлов проекта, нужный для работы со списком файлов в ADK}pa{ https://www.npmjs.com/package/gulp-filelist }"},
+			{"name": " gulp-using ", "caption": "p{ Вспомогающий модуль. Формирует лог файлов, которые Вы изменяете. }pa{ https://www.npmjs.com/package/gulp-using }"},
+			{"name": " map-stream ", "caption": "p{ Вспомогающий модуль. Формирует лог файлов, которые Вы изменяете. }pa{ https://www.npmjs.com/package/map-stream }"},
+			{"name": " gulp-plumber ", "caption": "p{ Вспомогающий модуль. Предотвращает сбои Gulp.js при возникновении ошибки }pa{ https://www.npmjs.com/package/gulp-plumber }"},
+			{"name": " gulp-autoprefixer ", "caption": "p{ Автопрефиксер. Позволяет не прописывать вручную вендорные префиксы. }pa{ https://www.npmjs.com/package/gulp-autoprefixer }"},
+			{"name": " gulp-uncss ", "caption": "p{ Удаляет неиспользуемые стили со страницы, что уменьшает размер css-файлов. }pa{ https://www.npmjs.com/package/gulp-uncss }"},
+			{"name": " exec ", "caption": "p{ При помощи этого модуля становится возможным использование системных команд ОС }p"}
+		]
+	},
+
+	{
+		"filename": "grid.scss",
+		"path":     "../apertura/scss",
+		"file":     "../apertura/scss/grid.scss",
+		"size":     "6090",
+		"length":   "6090",
+		"title":     " grid ",
+		"caption":     "p{ Модуль формирует сетку исходя из конфига bd{_config.scss} }p",
+		"type":     " scss ",
+
+		"properties": [
+
+			{"name": " g ", "caption": " p{ Класс bd{ .g } означает обертку. bd{ .g.w960 } - обертку шириной в w960 пикселей, если скрин пользователя шире данного значения, – блок позиционируется по центру, если меньше – растягивается на всю ширину скрина. Ширина задается один раз и берется из конфига (параметр bd{ $grid_sizes }). Каждое из этих значений - это ширина обертки, которую Вы можете использовать. Это и обертка шириной в 1400 пикселей (bd{ w1400 }), и в 960 (bd{ w960 }) }pp{ Обертка является оболочкой, внутри которой должны размещаться ячейки. }p"},
+			{"name": " g--rev ", "caption": " Обертка с обратным расположением ячеек (только для inline-block-элементов). "},
+			{"name": " c, cc, cd ", "caption": " p{ Для того, чтобы раздробить блок на условные ячейки, внутрь нужно поместить блок с классом bd{.c} или bd{.cc}. Класс bd{.c} обозначает инлайн-блок, с внутренним отступом по бокам в заданную величину пикселей (параметр bd{ $gutter }). }pp{ [$gutter|<content here>|$gutter] }pp{ Дробить сетку на ячейки крайне просто, если Вы знаете азы математики и умеете слогать. Для начала вы должны определиться, на сколько ячеек Вы хотите разбить сетку. За это отвечает параметр bd{ $grid_calc } .Например, Вы выбрали 12-колоночную сетку. Это означает, что любая ячейка будет дробиться исходя из соотношения ширины ячейки к общей ширине всех ячеек: класс bd{ x2d12 } вставит ячейку шириной в 2/12 общей ширины обертки.}pp{ Плюшка: Вы так же можете использовать не только дроби со знаменателем 12 (если Вы его выбрали), но и любые дроби, из параметра bd{ $grid_calc }. Это может быть и bd{ .x1d2 }, и bd{ .x2d6 }, и bd{ .x1d8 }, если эти дроби прописаны в bd{ $grid_calc }.}pp{ Так же, существует возможность задать фиксированную ширину, используя классы типа bd{ .w-fixed-50 }, bd{ .w-fixed-150 }, которые обозначают фиксированную ширину блока в пикселях. Значения берутся из параметра bd{ $fixed_widths }.}pp{ Обертка является оболочкой, внутри которой должны размещаться ячейки. }p"},
+			{"name": " cc ", "caption": " Ячейка без отступов - [<content here>]"},
+			{"name": " cc ", "caption": " Ячейка с отступами в два раза больше обычного: p{ [$gutter*2|<content here>|$gutter*2] }p "},
+			{"name": " w<WIDTH> ", "caption": " Ширина обертки. Формирует список классов типа w<WIDTH> исходя из значений параметра bd{ $grid_sizes } "}
+		]
+	},
+
+	{
+		"filename": "skin.scss",
+		"path":     "../apertura/scss",
+		"file":     "../apertura/scss/skin.scss",
+		"size":     "1556",
+		"length":   "1556",
+		"title":     " skin ",
+		"caption":     "p{ Модуль формирует файл скина, собиая во едино все файлы сетки и вспомогательные классы. }pp{ Если Вам нужно вручную менять стили при разных разрешениях дисплея, - создайте нужный файл в папке bd{ _media/ } и добавтье свои медиа-запросы в конец этого файла. }p",
+		"type":     " scss "
+	},
+
+	{
+		"filename": "_config.scss",
+		"path":     "../apertura/scss",
+		"file":     "../apertura/scss/_config.scss",
+		"size":     "8567",
+		"length":   "8567",
+		"title":     " defaults ",
+		"caption":     "p{ Конфигом системы служит .scss-файл, который содержит в себе настройки для всей системы вцелом. Он находится в папке bd{ scss/_config.scss }. }p",
+		"type":     " scss ",
+
+		"properties": [
+
+			{"name": " $gutter ", "caption": " Отступ по бокам внутри ячейки сетки. [$gutter|<content here>|$gutter]. Если параметр равен 0 - контент прижимается вплотную к соронам блока. По умолчанию задано 10пикс. "},
+			{"name": " $grid_line_height ", "caption": " Высота строки или междустрочный интервал. Применяется для bd{ <body> } "},
+			{"name": " $grid_sizes ", "caption": " Это массив с размерами шаблона. Если Вам дают макет шириной в 1400 пикселей, то вы указываете 1400. Если в одном шаблоне есть разные ширины сетки, к примеру 1400 и 960 пикселей, то вы указываете их оба через запятую, при чем от меньшего к большему. Допускается произвольное количество размеров (если они Вам нужны). "},
+			{"name": " $primary_grid ", "caption": " Основная ширина сетки. "},
+			{"name": " $grid_prefixes ", "caption": " p{ Это массив, содержащий ассоциативные массивы с брейкпоинтами. Брейкпоинты помогают Вам добиться отображения при разных ширинах дисплея (адаптивный дизайн) иной ширины блоков. }p p{ Здесь x1d4 – ширина ячейки по умолчанию (1/4). на мобильном телефоне мы хотим чтобы она отображалась по-другому (1/2), для этого мы используем брейк-поинт x1d2--m, который на мобильном устройстиве отобразит ячейку шире (1/2). }pp{ Массив состоит из ассоциативных массивов (480, ‘--m’), в которых передается ширина, при которой брейкпоинт должен сработать и префикс, по которому к брейкпоинту можно обратиться. Вы сами можете создать сколько угодно брейкпоинтов. }p "},
+			{"name": " $grid_calc ", "caption": " p{ Это части, на которые можно “дробить” ячейки в сетке. Мощнейшим преимуществом сетки есть дробление на произвольное количество ячеек, и сетка может разбиваться не на 12 колонок (как в Bootstrap), а на произвольное количество ячеек(например на 100, если это Вам нужно). }p p{ Эти части являются как ширинами блока, так и ширинами ячеек.Это значит, что вам не обязательно указывать постоянную ширину знаменателя (bd{x1d12}, bd{x3d12} и т.д). Это выражение - формирует процент от ширины, соответственно, bd{x1d2} и bd{x6d12} - это одно и то же (50%)) }pp{ Создает набор классов типа bd{.x<X>d<D>} }p "},
+			{"name": " $fixed_widths ", "caption": " p{ Содержит массив с фиксированными размерами (в пикселях). }p p{ Аналогично bd{$grid_calc}. }p"},
+			{"name": " $islands ", "caption": " p{ Массив с размерами отступов. Эти отступы означают равные отступы со всех сторон блока (от слова island, остров). То есть указывая 10px – Вы указываете отступ в 10 пикселей со всех сторон. Это есть padding и margin. }p p{ Создает набор классов типа bd{.island-<NUMBER>} }p "},
+			{"name": " $vertical_indents ", "caption": " p{ Массив с размерами отступов. Аналогично bd{$islands},за исключением того, что отступы указываются только по вертикали. }p p{ Создает набор классов типа: ul{li{ bd{.pad-v<NUMBER>} - внутренний отступ сверху и снизу }lili{ bd{.pad-top-<NUMBER>} - внутренний отступ сверху }lili{ bd{.pad-bot-<NUMBER>} - внутренний отступ снизу }lili{ bd{.marg-v<NUMBER>} - внешний отступ сверху и снизу }lili{ bd{.marg-top-<NUMBER>} - внешний отступ сверху }lili{ bd{.marg-bot-<NUMBER>} - внешний отступ снизу }li}ul}p "},
+			{"name": " $vertical_indents ", "caption": " p{ Массив с размерами отступов. Аналогично bd{$islands},за исключением того, что отступы указываются только по горизонтали. }p p{ Создает набор классов типа: ul{li{ bd{.pad-h<NUMBER>} - внутренний отступ слева и справа }lili{ bd{.pad-left-<NUMBER>} - внутренний отступ слева }lili{ bd{.pad-right-<NUMBER>} - внутренний отступ справа }lili{ bd{.marg-h<NUMBER>} - внешний отступ слева и справа }lili{ bd{.marg-left-<NUMBER>} - внешний отступ слева }lili{ bd{.marg-right-<NUMBER>} - внешний отступ справа }li}ul}p "},
+			{"name": " $min_font_size, $max_font_size ", "caption": " p{ Размеры шрифта. Применяются к блоку. }p"},
+			{"name": " .YourColor ", "caption": " Устанавливает цвет текста с названием YourColor.Параметры задаются в bd{ _config.scss }, в объекте bd{ $colors_list } "},
+			{"name": " .bg-YourColor ", "caption": " Устанавливает фона блока с названием YourColor.Параметры задаются в bd{ _config.scss }, в объекте bd{ $colors_list_bg } "},
+			{"name": " $font_size ", "caption": " Устанавливает размер шрифта по умолчанию для <body> "},
+			{"name": " $font_family ", "caption": " Устанавливает шрифт по умолчанию для <body> "}
+		]
+	},
+
+	{
+		"filename": "_mixins.scss",
+		"path":     "../apertura/scss/_mixins",
+		"file":     "../apertura/scss/_mixins/_mixins.scss",
+		"size":     "15888",
+		"length":   "15888",
+		"title":     " mixins ",
+		"caption":     "p{ Модуль добавляет в систему заранее подготовленныемиксины, которые используются в коде. }pp{ Чтобы использовать миксины - вставвьте нужный миксинв код при помощи директивы bd{ @include my-mixin(mixin-values); }}p",
+		"type":     " scss ",
+
+		"mixins": [
+
+			{"name":      " background-clip() ",
+				"caption":   " ",
+				"arguments": " $clip ",
+				"returns":   " -webkit-, -moz-, -ms-, -o- "
+			},
+			{"name":      " background-origin() ",
+				"caption":   " ",
+				"arguments": " $origin ",
+				"returns":   " -webkit-, -moz-, -ms-, -o- "
+			},
+			{"name":      " background-size() ",
+				"caption":   " ",
+				"arguments": " $size ",
+				"returns":   " -webkit-, -moz-, -ms-, -o- "
+			},
+			{"name":      " border-bottom-left-radius() ",
+				"caption":   " ",
+				"arguments": " $radius ",
+				"returns":   " -webkit-, -moz-, -ms- "
+			},
+			{"name":      " border-bottom-right-radius() ",
+				"caption":   " ",
+				"arguments": " $radius ",
+				"returns":   " -webkit-, -moz-, -ms- "
+			},
+			{"name":      " border-top-right-radius() ",
+				"caption":   " ",
+				"arguments": " $radius ",
+				"returns":   " -webkit-, -moz-, -ms- "
+			},
+			{"name":      " border-top-left-radius() ",
+				"caption":   " ",
+				"arguments": " $radius ",
+				"returns":   " -webkit-, -moz-, -ms- "
+			},
+			{"name":      " border-radius() ",
+				"caption":   " ",
+				"arguments": " $radius ",
+				"returns":   " -webkit-, -moz-, -ms- "
+			},
+			{"name":      " box-shadow() ",
+				"caption":   " ",
+				"arguments": " $shadow ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " align-content() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $type ",
+				"returns":   " -webkit- "
+			},
+			{"name":      " align-items() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $type ",
+				"returns":   " -webkit- "
+			},
+			{"name":      " align-self() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $type ",
+				"returns":   " -webkit- "
+			},
+			{"name":      " flex() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -ms- "
+			},
+			{"name":      " flex-basis() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " flex-direction() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $direction ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " flex-flow() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $flow ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " flex-grow() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $grow ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " flex-shirk() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $shirk ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " flex-wrap() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $wrap ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " justify-content() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " order() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " tab-size() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $type ",
+				"returns":   " -o-, -moz- "
+			},
+			{"name":      " keyframes() ",
+				"caption":   " animations ",
+				"arguments": " $name ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " animation() ",
+				"caption":   " animations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " animation-delay() ",
+				"caption":   " animations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " animation-direction() ",
+				"caption":   " animations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " animation-duration() ",
+				"caption":   " animations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " animation-fill-mode() ",
+				"caption":   " animations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " animation-iteration-count() ",
+				"caption":   " animations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " animation-timing-function() ",
+				"caption":   " animations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " animation-play-state() ",
+				"caption":   " animations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " backface-visibility() ",
+				"caption":   " transformations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " perspective() ",
+				"caption":   " transformations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " perspective-origin() ",
+				"caption":   " transformations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " transform() ",
+				"caption":   " transformations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -ms-, -o- "
+			},
+			{"name":      " transform-origin() ",
+				"caption":   " transformations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -ms-, -o- "
+			},
+			{"name":      " transform-style() ",
+				"caption":   " transformations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " transition() ",
+				"caption":   " transitions ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " transition-property() ",
+				"caption":   " transitions ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " transition-duration() ",
+				"caption":   " transitions ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " transition-timing-function() ",
+				"caption":   " transitions ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " transition-delay() ",
+				"caption":   " transitions ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " box-sizing() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " outline-offset() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit- "
+			},
+			{"name":      " resize() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -moz- "
+			},
+			{"name":      " text-overflow() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -o- "
+			},
+			{"name":      " column-count() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " column-gap() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " column-rule() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " column-rule-color() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " column-rule-style() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " column-rule-width() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " column-rule-span() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " column-width() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " columns() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " filter() ",
+				"caption":   " UI ",
+				"arguments": " $properties ",
+				"returns":   " -webkit-, -moz-, -o- "
+			}
+		]
+	},
+
+	{
+		"filename": "_fonts.scss",
+		"path":     "../apertura/scss/_default",
+		"file":     "../apertura/scss/_default/_fonts.scss",
+		"size":     "3054",
+		"length":   "3054",
+		"title":     " fonts ",
+		"caption":     "p{ Модуль формирует вспомогательные классы преимущественнодля работы с текстом. }p",
+		"type":     " scss ",
+
+		"properties": [
+
+			{"name": " light ", "caption": " Тонкое начертание шрифта (100) "},
+			{"name": " semilight ", "caption": " Тонкое начертание шрифта (300) "},
+			{"name": " regular ", "caption": " Нормальное начертание шрифта (400) "},
+			{"name": " semibold ", "caption": " Полужирное начертание шрифта (500) "},
+			{"name": " bold ", "caption": " Жирное начертание шрифта (700) "},
+			{"name": " extrabold ", "caption": " Очень жирный текст ('black', 900) "},
+			{"name": " lower ", "caption": " Приведение к нижнему регистру "},
+			{"name": " upper ", "caption": " Приведение к верхнему регистру "},
+			{"name": " underline ", "caption": " Подчеркивание текста. Для <a> - по умолчанию показывается подчеркивание, при наведении - убирается. "},
+			{"name": " rev-underline ", "caption": " Подчеркивание текста. Для <a> - по умолчанию убирается подчеркивание, при наведении - показывается. "},
+			{"name": " rev-underline ", "caption": " Курсивный шрифт. "},
+			{"name": " oblique ", "caption": " Курсив и наклонный шрифт при всей их похожести не одно и то же. Курсив это специальный шрифт имитирующий рукописный, наклонный же образуется путем наклона обычных знаков вправо. "},
+			{"name": " blink ", "caption": " Мигающий текст "},
+			{"name": " strike ", "caption": " Зачеркнутый текст. "},
+			{"name": " overline ", "caption": " Надчеркнуты йшрифт. "}
+		]
+	},
+
+	{
+		"filename": "_indents.scss",
+		"path":     "../apertura/scss/_default",
+		"file":     "../apertura/scss/_default/_indents.scss",
+		"size":     "11601",
+		"length":   "11601",
+		"title":     " indents ",
+		"caption":     "p{ Модуль добавляет классы для работы с внешними и внутренними отступами. }p",
+		"type":     " scss ",
+
+		"properties": [
+
+			{"name": " no-marg ", "caption": " Убирает внешние отступы блока. "},
+			{"name": " no-pad ", "caption": " Убирает внутренние отступы блока. "},
+			{"name": " exact-fit ", "caption": " Убирает внутренние и внешние отступы блока. "},
+			{"name": " island-** ", "caption": " Добавляет внутренние отступы со всех сторон.Парметры указываются в bd{ $islands } "},
+			{"name": " pad-h** ", "caption": " Добавляет внутренние отступы по горизонтали.Парметры указываются в bd{ $horizontal_indents } "},
+			{"name": " pad-v** ", "caption": " Добавляет внутренние отступы по вертикали.Парметры указываются в bd{ $vertical_indents } "},
+			{"name": " pad-top-** ", "caption": " Добавляет внутренний отступ сверху.Парметры указываются в bd{ $vertical_indents } "},
+			{"name": " pad-bot-** ", "caption": " Добавляет внутренний отступ снизу.Парметры указываются в bd{ $vertical_indents } "},
+			{"name": " pad-left-** ", "caption": " Добавляет внутренний отступ слева.Парметры указываются в bd{ $horizontal_indents } "},
+			{"name": " pad-right-** ", "caption": " Добавляет внутренний отступ справа.Парметры указываются в bd{ $horizontal_indents } "},
+			{"name": " pad-h**--<BRAKEPOINT> ", "caption": " Добавляет внутренние отступы по горизонтали при разрешении <BRAKEPOINT>.Парметры указываются в bd{ $horizontal_indents } и bd{ $grid_prefixes } "},
+			{"name": " pad-v**--<BRAKEPOINT> ", "caption": " Добавляет внутренние отступы по вертикалипри разрешении <BRAKEPOINT>.Парметры указываются в bd{ $vertical_indents } и bd{ $grid_prefixes } "},
+			{"name": " pad-top-**--<BRAKEPOINT> ", "caption": " Добавляет внутренний отступ сверхупри разрешении <BRAKEPOINT>.Парметры указываются в bd{ $vertical_indents } и bd{ $grid_prefixes } "},
+			{"name": " pad-bot-**--<BRAKEPOINT> ", "caption": " Добавляет внутренний отступ снизупри разрешении <BRAKEPOINT>.Парметры указываются в bd{ $vertical_indents } и bd{ $grid_prefixes } "},
+			{"name": " pad-left-**--<BRAKEPOINT> ", "caption": " Добавляет внутренний отступ слевапри разрешении <BRAKEPOINT>.Парметры указываются в bd{ $horizontal_indents } и bd{ $grid_prefixes } "},
+			{"name": " pad-right-**--<BRAKEPOINT> ", "caption": " Добавляет внутренний отступ справапри разрешении <BRAKEPOINT>.Парметры указываются в bd{ $horizontal_indents } и bd{ $grid_prefixes } "},
+			{"name": " marg-** ", "caption": " Добавляет внешние отступы со всех сторон.Парметры указываются в bd{ $islands } "},
+			{"name": " marg-h** ", "caption": " Добавляет внешние отступы по горизонтали.Парметры указываются в bd{ $horizontal_indents } "},
+			{"name": " marg-v** ", "caption": " Добавляет внешние отступы по вертикали.Парметры указываются в bd{ $vertical_indents } "},
+			{"name": " marg-top-** ", "caption": " Добавляет внешние отступы сверху.Парметры указываются в bd{ $vertical_indents } "},
+			{"name": " marg-bot-** ", "caption": " Добавляет внешние отступы снизу.Парметры указываются в bd{ $vertical_indents } "},
+			{"name": " marg-left-** ", "caption": " Добавляет внешние отступы слева.Парметры указываются в bd{ $horizontal_indents } "},
+			{"name": " marg-right-** ", "caption": " Добавляет внешние отступы справа.Парметры указываются в bd{ $horizontal_indents } "},
+			{"name": " marg-h**--<BRAKEPOINT> ", "caption": " Добавляет внешние отступы по горизонталипри разрешении <BRAKEPOINT>.Парметры указываются в bd{ $horizontal_indents } и bd{ $grid_prefixes } "},
+			{"name": " marg-v**--<BRAKEPOINT> ", "caption": " Добавляет внешние отступы по вертикалипри разрешении <BRAKEPOINT>.Парметры указываются в bd{ $vertical_indents } и bd{ $grid_prefixes } "},
+			{"name": " marg-top-**--<BRAKEPOINT> ", "caption": " Добавляет внешние отступы сверхупри разрешении <BRAKEPOINT>.Парметры указываются в bd{ $vertical_indents } и bd{ $grid_prefixes } "},
+			{"name": " marg-bot-**--<BRAKEPOINT> ", "caption": " Добавляет внешние отступы снизупри разрешении <BRAKEPOINT>.Парметры указываются в bd{ $vertical_indents } и bd{ $grid_prefixes } "},
+			{"name": " marg-left-**--<BRAKEPOINT> ", "caption": " Добавляет внешние отступы слевапри разрешении <BRAKEPOINT>.Парметры указываются в bd{ $horizontal_indents } и bd{ $grid_prefixes } "},
+			{"name": " marg-right-**--<BRAKEPOINT> ", "caption": " Добавляет внешние отступы справапри разрешении <BRAKEPOINT>.Парметры указываются в bd{ $horizontal_indents } и bd{ $grid_prefixes } "},
+			{"name": " no-marg--<BRAKEPOINT> ", "caption": " Убирает внешние отступы блока при разрешении <BRAKEPOINT>. "},
+			{"name": " no-pad--<BRAKEPOINT> ", "caption": " Убирает внутренние отступы блока при разрешении <BRAKEPOINT>. "},
+			{"name": " exact-fit--<BRAKEPOINT> ", "caption": " Убирает внутренние и внешние отступы блока при разрешении <BRAKEPOINT>. "}
+		]
+	},
+
+	{
+		"filename": "_default.scss",
+		"path":     "../apertura/scss/_default",
+		"file":     "../apertura/scss/_default/_default.scss",
+		"size":     "16764",
+		"length":   "16764",
+		"title":     " defaults ",
+		"caption":     "p{ Модуль по минимуму сбрасывает глобальные стили (по типу normalize.css), указывает начальные настройки дляшрифтов, а так же вносит ряд заранее щаготовленных классовдля манипуляции и кастомизации элементов. }p",
+		"type":     " scss ",
+
+		"properties": [
+
+			{"name": " relative ", "caption": " Относительное позиционирование "},
+			{"name": " absolute ", "caption": " Абсолютное позиционирование "},
+			{"name": " fixed ", "caption": " Фиксированный блок "},
+			{"name": " static ", "caption": " Относительное позиционирование "},
+			{"name": " clear-input ", "caption": " Сброс стилей bd{<input>}. Убирает рамку, фонотступы, устанавливает ширину в 100%. "},
+			{"name": " noresize ", "caption": " Убирает возможность изменения размера для bd{<textarea>}. "},
+			{"name": " clear-list, unstyled-list, clear-ul ", "caption": " Убирает отступы для bd{<ul>}, как внешние, таки внутренние. Убирает маркеры списка. "},
+			{"name": " disable-hover ", "caption": " Убирает pointer-events (события ховера, фокуса и т.д) для элемента, которому непосредственно добавляется класс. "},
+			{"name": " disable-hover-childs ", "caption": " Убирает pointer-events (события ховера, фокуса и т.д) для элементов, строго лежащим внутри элемента, которому добавляется класс. "},
+			{"name": " disable-hover-allchilds ", "caption": " Убирает pointer-events (события ховера, фокуса и т.д) для любых потомков, лежащих внутри элемента, которому добавляется класс. "},
+			{"name": " ultra-hide ", "caption": " Устанавливает для элемента абсолютное позиционирование, задает ширину и высоту в 1пикс,и скрывает элемент со страницы путем отрицательногоотступа вверх-влево. "},
+			{"name": " r ", "caption": " Применяется для <img>, указывает ширину 100%. Картинка будет автоматически увеличивать высоту, в зависимости от своей ширины. "},
+			{"name": " center ", "caption": " Выравнивает текст по центру блока. Выравниваетbd{inline-block}-элементы по центру родителя. Выравнивает bd{inline-flex}-элементы по центру bd{flex}-родителя. "},
+			{"name": " right ", "caption": " Выравнивает текст по правой стороне блока. Выравнивает bd{inline-block}-элементы по правой стороне родителя. Выравнивает bd{inline-flex}-элементы по правой стороне bd{flex}-родителя. "},
+			{"name": " left ", "caption": " Выравнивает текст по левой стороне блока. Выравнивает bd{inline-block}-элементы по левой стороне родителя. Выравнивает bd{inline-flex}-элементы по левой стороне bd{flex}-родителя. "},
+			{"name": " justify ", "caption": " Выравнивает текст по краям для блока. Выравнивает bd{inline-flex}-элементы по краям bd{flex}-родителя. "},
+			{"name": " v-top ", "caption": " Выравнивает bd{inline-block}-элементы по верхней грани. Выравнивает bd{inline-flex}-элементы по верхней грани."},
+			{"name": " v-middle ", "caption": " Выравнивает bd{inline-block}-элементы вертикально по середине. Выравнивает bd{inline-flex}-элементы вертикально по середине."},
+			{"name": " v-bottom ", "caption": " Выравнивает bd{inline-block}-элементы по нижней грани. Выравнивает bd{inline-flex}-элементы по нижней грани."},
+			{"name": " v-baseline ", "caption": " Выравнивает bd{inline-block}-элементы базовой линии текста. Выравнивает bd{inline-flex}-элементы базовой линии текста."},
+			{"name": " pull-left ", "caption": " Обтекание блока слева (float)."},
+			{"name": " pull-right ", "caption": " Обтекание блока справа (float)."},
+			{"name": " clearfix, pull-clear ", "caption": " Очистка обтеканий (floats)."},
+			{"name": " flex-row ", "caption": " Строка flexbox."},
+			{"name": " flex-row-rev ", "caption": " Строка flexbox с обратным отображением. "},
+			{"name": " flex-col ", "caption": " Ячейка flexbox. "},
+			{"name": " flex-col-rev ", "caption": " Ячейка flexbox с обратным отображением. "},
+			{"name": " around ", "caption": " Выравнивает bd{inline-flex}-элементы с отутупами снаружи по краям bd{flex}-родителя. "},
+			{"name": " around ", "caption": " Выравнивает bd{inline-flex}-элементы по одинковой высоте. "},
+			{"name": " around ", "caption": " Выравнивает bd{inline-flex}-элементы по одинковой высоте, и центрирует их содержимое вертикально по центру. "},
+			{"name": " flex-nowrap ", "caption": " Отключает оборачивание bd{inline-flex}-элементов, лежащих внутри блока. "},
+			{"name": " flex-wrap ", "caption": " Включает оборачивание bd{inline-flex}-элементов, лежащих внутри блока. "},
+			{"name": " flex-wrap-rev ", "caption": " Включает оборачивание bd{inline-flex}-элементов, лежащих внутри блока изменяя порядок отображения. "},
+			{"name": " block ", "caption": " Блочный элемент. "},
+			{"name": " block ", "caption": " Строчный блок (inline-block) "},
+			{"name": " block ", "caption": " Блочный элемент (!important). "},
+			{"name": " block ", "caption": " Строчный блок (inline-block !important) "},
+			{"name": " flex ", "caption": " Flex-блок. По умолчанию ширина 100%, потомки выравниваются по левому краю."},
+			{"name": " inline-flex ", "caption": " Inline-flex-блок."},
+			{"name": " none ", "caption": " Скрытый блок."},
+			{"name": " table ", "caption": " Таблица. По умолчанию ширина 100%. "},
+			{"name": " row ", "caption": " Строка таблицы. "},
+			{"name": " thead ", "caption": " Шапка таблицы (table-header-group). "},
+			{"name": " tfoot ", "caption": " Подвал таблицы (table-footer-group). "},
+			{"name": " tbody ", "caption": " Контент таблицы (table-column-group). "},
+			{"name": " table-cell ", "caption": " Ячейка таблицы. "},
+			{"name": " list-item ", "caption": " Элемент списка. "},
+			{"name": " o-hid ", "caption": " Скрывает содержимое блока, выходящее за его грани. "},
+			{"name": " o-hid-y ", "caption": " Скрывает содержимое блока, выходящее за его грани по вертикали. "},
+			{"name": " o-hid-x ", "caption": " Скрывает содержимое блока, выходящее за его грани по горизонтали. "},
+			{"name": " o-hid-x ", "caption": " Автоматически добавляет прокрутку, если содержимое блока выходит за грани. "},
+			{"name": " o-auto-x ", "caption": " Автоматически добавляет прокрутку, если содержимое блока выходит за грани по горизонтали. "},
+			{"name": " o-auto-y ", "caption": " Автоматически добавляет прокрутку, если содержимое блока выходит за грани по вертикали. "},
+			{"name": " o-visbl ", "caption": " Не обрезает содержимое, если оно выходит за грани блока. "},
+			{"name": " o-visbl-x ", "caption": " Не обрезает содержимое, если оно выходит за грани блока по горизонтали. "},
+			{"name": " o-visbl-y ", "caption": " Не обрезает содержимое, если оно выходит за грани блока по вертикали. "},
+			{"name": " bg-none ", "caption": " Удаляет фон блока. "},
+			{"name": " bg-cover ", "caption": " Устанавливает заполнение фоновым изображением фона блока таким образом, чтобы изображение полностью заполняло фон по вертикали и по горизонтали. "},
+			{"name": " bg-contain ", "caption": " Устанавливает заполнение фоновым изображением фона блока таким образом, чтобы изображение равнялосьпо ширине или высоте блока. "},
+			{"name": " circle-item ", "caption": " Устанавливает скругление блока в 50%. "},
+			{"name": " .YourColor ", "caption": " Устанавливает цвет текста с названием YourColor.Параметры задаются в bd{ _config.scss }, в объекте bd{ $colors_list } "},
+			{"name": " .bg-YourColor ", "caption": " Устанавливает фона блока с названием YourColor.Параметры задаются в bd{ _config.scss }, в объекте bd{ $colors_list_bg } "}
+		]
+	},
+
+	{
+		"filename": "dev-tools-skin.css",
+		"path":     "../apertura/dev-tools/dev-tools-css",
+		"file":     "../apertura/dev-tools/dev-tools-css/dev-tools-skin.css",
+		"size":     "37099",
+		"length":   "37099",
+		"title":     " mixins ",
+		"caption":     "p{ Модуль добавляет в систему заранее подготовленныемиксины, которые используются в коде. }pp{ Чтобы использовать миксины - вставвьте нужный миксинв код при помощи директивы bd{ @include my-mixin(mixin-values); }}p",
+		"type":     " scss ",
+
+		"mixins": [
+
+			{"name":      " background-clip() ",
+				"caption":   " ",
+				"arguments": " $clip ",
+				"returns":   " -webkit-, -moz-, -ms-, -o- "
+			},
+			{"name":      " background-origin() ",
+				"caption":   " ",
+				"arguments": " $origin ",
+				"returns":   " -webkit-, -moz-, -ms-, -o- "
+			},
+			{"name":      " background-size() ",
+				"caption":   " ",
+				"arguments": " $size ",
+				"returns":   " -webkit-, -moz-, -ms-, -o- "
+			},
+			{"name":      " border-bottom-left-radius() ",
+				"caption":   " ",
+				"arguments": " $radius ",
+				"returns":   " -webkit-, -moz-, -ms- "
+			},
+			{"name":      " border-bottom-right-radius() ",
+				"caption":   " ",
+				"arguments": " $radius ",
+				"returns":   " -webkit-, -moz-, -ms- "
+			},
+			{"name":      " border-top-right-radius() ",
+				"caption":   " ",
+				"arguments": " $radius ",
+				"returns":   " -webkit-, -moz-, -ms- "
+			},
+			{"name":      " border-top-left-radius() ",
+				"caption":   " ",
+				"arguments": " $radius ",
+				"returns":   " -webkit-, -moz-, -ms- "
+			},
+			{"name":      " border-radius() ",
+				"caption":   " ",
+				"arguments": " $radius ",
+				"returns":   " -webkit-, -moz-, -ms- "
+			},
+			{"name":      " box-shadow() ",
+				"caption":   " ",
+				"arguments": " $shadow ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " align-content() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $type ",
+				"returns":   " -webkit- "
+			},
+			{"name":      " align-items() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $type ",
+				"returns":   " -webkit- "
+			},
+			{"name":      " align-self() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $type ",
+				"returns":   " -webkit- "
+			},
+			{"name":      " flex() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -ms- "
+			},
+			{"name":      " flex-basis() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " flex-direction() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $direction ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " flex-flow() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $flow ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " flex-grow() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $grow ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " flex-shirk() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $shirk ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " flex-wrap() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $wrap ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " justify-content() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " order() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " tab-size() ",
+				"caption":   " bd{flexbox} ",
+				"arguments": " $type ",
+				"returns":   " -o-, -moz- "
+			},
+			{"name":      " keyframes() ",
+				"caption":   " animations ",
+				"arguments": " $name ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " animation() ",
+				"caption":   " animations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " animation-delay() ",
+				"caption":   " animations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " animation-direction() ",
+				"caption":   " animations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " animation-duration() ",
+				"caption":   " animations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " animation-fill-mode() ",
+				"caption":   " animations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " animation-iteration-count() ",
+				"caption":   " animations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " animation-timing-function() ",
+				"caption":   " animations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " animation-play-state() ",
+				"caption":   " animations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " backface-visibility() ",
+				"caption":   " transformations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " perspective() ",
+				"caption":   " transformations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " perspective-origin() ",
+				"caption":   " transformations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " transform() ",
+				"caption":   " transformations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -ms-, -o- "
+			},
+			{"name":      " transform-origin() ",
+				"caption":   " transformations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -ms-, -o- "
+			},
+			{"name":      " transform-style() ",
+				"caption":   " transformations ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " transition() ",
+				"caption":   " transitions ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " transition-property() ",
+				"caption":   " transitions ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " transition-duration() ",
+				"caption":   " transitions ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " transition-timing-function() ",
+				"caption":   " transitions ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " transition-delay() ",
+				"caption":   " transitions ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz-, -o- "
+			},
+			{"name":      " box-sizing() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " outline-offset() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit- "
+			},
+			{"name":      " resize() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -moz- "
+			},
+			{"name":      " text-overflow() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -o- "
+			},
+			{"name":      " column-count() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " column-gap() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " column-rule() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " column-rule-color() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " column-rule-style() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " column-rule-width() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " column-rule-span() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " column-width() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " columns() ",
+				"caption":   " UI ",
+				"arguments": " $type ",
+				"returns":   " -webkit-, -moz- "
+			},
+			{"name":      " filter() ",
+				"caption":   " UI ",
+				"arguments": " $properties ",
+				"returns":   " -webkit-, -moz-, -o- "
+			}
+		]
+	}
+]
